@@ -1,11 +1,19 @@
 import '@testing-library/jest-dom/extend-expect'
-import ReactDOM from 'react-dom'
-import React from 'react'
+import {render, screen} from '@testing-library/react'
+import * as React from 'react'
+
 const {FavoriteNumber} = require('favorite-number')
 
+// function render(ui) {
+//   const container = document.createElement('div')
+//   ReactDOM.render(ui, container)
+//   const queries = getQueriesForElement(container)
+//   return {container, ...queries}
+// }
+
 test('renders a number input with a label "Favorite Number"', () => {
-  const div = document.createElement('div')
-  ReactDOM.render(<FavoriteNumber />, div)
-  expect(div.querySelector('input')).toHaveAttribute('type', 'number')
-  expect(div.querySelector('label')).toHaveTextContent('Favorite Number')
+  render(<FavoriteNumber />)
+  const input = screen.getByLabelText(/favorite number/i)
+  expect(input).toHaveAttribute('type', 'number')
+  //   debug(input)
 })
